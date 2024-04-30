@@ -4,26 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="650dp"
+    android:background="@drawable/backgroundimage"
     android:orientation="vertical"
-    android:background="@drawable/background"
-   >
+    android:visibility="visible">
 
     <ImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/_3_removebg_preview_2"
         android:layout_gravity="center"
-        />
+        android:src="@drawable/_3_removebg_preview_2"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/UserNameHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hi Dylan !"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/Greeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Good Morning"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/TodayHead"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:text="Today’s Planning"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnedit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="horizontal">
+        android:scrollbars="horizontal"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#FF9800"
+                android:visibility="visible"
+                app:srcCompat="@drawable/background" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -86,10 +135,10 @@
 
 
     <ListView
+        android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listview"
-        tools:listitem="@layout/list_item"/>
+        tools:listitem="@layout/list_item" />
 
 
 </LinearLayout>
