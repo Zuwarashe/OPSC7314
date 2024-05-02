@@ -5,4 +5,7 @@
     <color name="blue">#1a9df1</color>
     <color name="yellow">#ffd230</color>
     <color name="HomeBGColour">#DEE9EE</color>
+    <color name="DarkBlue">#252850</color>
+    <color name="Purple">#800080</color>
+
 </resources>
