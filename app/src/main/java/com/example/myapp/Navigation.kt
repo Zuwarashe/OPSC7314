@@ -31,6 +31,12 @@ class Navigation : AppCompatActivity() {
         addBtn = findViewById(R.id.add_btn)
         graphBtn = findViewById(R.id.graph_btn)
 
+
+        homeBtn.setOnClickListener {
+
+            val intent = Intent(this,Home::class.java )
+            startActivity(intent)
+        }
     }
     private fun  replaceFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit()
