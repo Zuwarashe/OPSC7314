@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ViewsFragment : Fragment() {
 
@@ -39,7 +42,8 @@ class ViewsFragment : Fragment() {
 
         // Set up spinner
         val categories = arrayOf("Category 1", "Category 2", "Category 3")
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories)
+        val adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCategory.adapter = adapter
 
@@ -57,6 +61,36 @@ class ViewsFragment : Fragment() {
             val endTime = editTextEndTime.text.toString()
             val category = spinnerCategory.selectedItem.toString()
 
+            // Validate input
+            if (projectName.isBlank() || date.isBlank() || startTime.isBlank() || endTime.isBlank()) {
+                Toast.makeText(
+                    requireContext(),
+                    "Please fill in all required fields",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            // Validate date format
+            if (!isValidDate(date)) {
+                Toast.makeText(
+                    requireContext(),
+                    "Please enter a valid date (dd MMMM yyyy)",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            // Validate time format
+            if (!isValidTime(startTime) || !isValidTime(endTime)) {
+                Toast.makeText(
+                    requireContext(),
+                    "Please enter a valid time (HH:mm)",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
             // Perform any further processing (e.g., validation, saving data)
             // For now, let's just log the data
             println("Project Name: $projectName")
@@ -68,6 +102,28 @@ class ViewsFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun isValidDate(dateStr: String): Boolean {
+        return try {
+            val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+            dateFormat.isLenient = false // Setting lenient to false
+            dateFormat.parse(dateStr)
+            true
+        } catch (e: ParseException) {
+            false
+        }
+    }
+
+    private fun isValidTime(timeStr: String): Boolean {
+        return try {
+            val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+            timeFormat.isLenient = false // Setting lenient to false
+            timeFormat.parse(timeStr)
+            true
+        } catch (e: ParseException) {
+            false
+        }
     }
 
     private fun clearForm() {
