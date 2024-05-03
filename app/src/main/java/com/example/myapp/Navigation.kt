@@ -3,6 +3,7 @@ package com.example.myapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -13,52 +14,29 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Navigation : AppCompatActivity() {
 
-   private lateinit var bottomNavigationView: BottomNavigationView
+    lateinit var homeBtn : Button
+    lateinit var profileBtn : Button
+    lateinit var listBtn : Button
+    lateinit var addBtn : Button
+    lateinit var graphBtn : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_navigation)
 
-        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        homeBtn = findViewById(R.id.home_btn)
+        profileBtn = findViewById(R.id.profile_btn)
+        listBtn = findViewById(R.id.list_btn)
+        addBtn = findViewById(R.id.add_btn)
+        graphBtn = findViewById(R.id.graph_btn)
 
-        bottomNavigationView.setOnItemSelectedListener { MenuItem ->
-            when(MenuItem.itemId){
-                R.id.home_icon ->{
 
+        homeBtn.setOnClickListener {
 
-                    val intent = Intent(this, Home::class.java)
-                    startActivity(intent)
-                    true
-                //    replaceFragment(HomeFragment())
-                //    true
-                }
-
-                R.id.line_icon ->{
-                    replaceFragment(ViewsFragment())
-                    true
-                }
-
-                R.id.add_icon ->{
-                    Toast.makeText(this,"yeah neh", Toast.LENGTH_SHORT).show()
-                    true
-                }
-
-                R.id.graph_icon ->{
-                    replaceFragment(GraphFragment())
-                    true
-                }
-
-                R.id.profile_icon ->{
-                    replaceFragment(ProfileFragment())
-                    true
-                }
-                else -> false
-            }
+            val intent = Intent(this,Home::class.java )
+            startActivity(intent)
         }
-        replaceFragment(HomeFragment())
-
-
     }
     private fun  replaceFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit()
